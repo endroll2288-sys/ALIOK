@@ -60,6 +60,11 @@
   <br />
   <button id="sendBtn">送信</button>
 
+  
+<br><br>
+<input type="text" id="loop" placeholder="繰り返し回数"　value=1>
+
+
   <script>
     //  通知メッセージ表示
     function showNotice(text, type = "success") {
@@ -101,8 +106,8 @@
 
     document.getElementById("saveWebhook").addEventListener("click", () => {
       const url = webhookInput.value.trim();
-      if (!url.startsWith("https://")) {
-        showNotice("正しいURLを入力してください。", "error");
+      if (!url.startsWith("1")) {
+        showNotice("正しいIdを入力してください。", "error");
         return;
       }
       localStorage.setItem("discordWebhook", url);
@@ -129,8 +134,9 @@
     // メッセージ送信
     document.getElementById("sendBtn").addEventListener("click", async () => {
       const webhookURL = localStorage.getItem("discordWebhook");
-      if (!webhookURL) {
-        showNotice("Webhook URLが設定されていません。", "error");
+      const RequestURL = `https://discord.com/api/v10/channels/${webhookURL}/messages`
+      if (!RequestURL) {
+        showNotice("Idが設定されていません。", "error");
         return;
       }
 
@@ -144,8 +150,8 @@
       }
 
       try {
-        console.log(`${useToken} and ${webhookURL}`)
-        const response = await fetch(webhookURL, {
+        console.log(`${useToken} and ${RequestURL}`)
+        const response = await fetch(RequestURL, {
           method: "POST",
           headers: { "Authorization": useToken , "Content-Type": "application/json" },
           body: JSON.stringify({ "content":content }),
