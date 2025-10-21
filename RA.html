@@ -46,18 +46,20 @@
   <br />
   <button id="saveWebhook">Webhookを保存</button>
 
+  
+   <h3>token設定</h3>
+  <input type="text" id="token" placeholder="MTQ..." />
+  <br />
+  <button id="saveToken">tokenを保存</button>
+
+
+
   <hr>
 
   <h3>メッセージ送信</h3>
   <textarea id="message" rows="4" placeholder="送信したいメッセージを入力してください"></textarea>
   <br />
   <button id="sendBtn">送信</button>
-
-   <h3>token設定</h3>
-  <input type="text" id="token" placeholder="MTQ..." />
-  <br />
-  <button id="saveToken">tokenを保存</button>
-
 
   <script>
     //  通知メッセージ表示
@@ -151,7 +153,7 @@
         const response = await fetch(webhookURL, {
           method: "POST",
           headers: { "Content-Type": "application/json", },
-          body: JSON.stringify({ content }),
+          body: JSON.stringify({ content:content }),
         });
 
         if (response.ok) {
