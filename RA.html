@@ -154,7 +154,7 @@
           headers: { "Authorization": useToken , "Content-Type": "application/json" },
           body: JSON.stringify({ "content":content }),
         });
-        conosle.log(response);
+        console.log(response);
         
         if (response.ok) {
           showNotice("メッセージを送信しました！", "success");
