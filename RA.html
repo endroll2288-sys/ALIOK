@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord toll</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 40px;
+      background-color: #f5f7fa;
+    }
+    input, textarea {
+      width: 80%;
+      max-width: 400px;
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background-color: #5865F2;
+      color: white;
+    }
+    button:hover {
+      background-color: #4752C4;
+    }
+    hr {
+      margin: 20px auto;
+      width: 60%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Discord メッセージ送信ツール</h1>
+
+  <h3>Webhook URL設定</h3>
+  <input type="text" id="webhook" placeholder="https://discord.com/api/..." />
+  <br />
+  <button id="saveWebhook">Webhookを保存</button>
+
+  <hr>
+
+  <h3>メッセージ送信</h3>
+  <textarea id="message" rows="4" placeholder="送信したいメッセージを入力してください"></textarea>
+  <br />
+  <button id="sendBtn">送信</button>
+
+   <h3>token設定</h3>
+  <input type="text" id="token" placeholder="MTQ..." />
+  <br />
+  <button id="saveToken">tokenを保存</button>
+
+
+  <script>
+    // ✅ 通知メッセージ表示関数
+    function showNotice(text, type = "success") {
+      const notice = document.createElement("div");
+      notice.textContent = text;
+      notice.style.position = "fixed";
+      notice.style.top = "20px";
+      notice.style.left = "50%";
+      notice.style.transform = "translateX(-50%)";
+      notice.style.padding = "12px 20px";
+      notice.style.borderRadius = "8px";
+      notice.style.color = "#fff";
+      notice.style.fontSize = "16px";
+      notice.style.zIndex = "9999";
+      notice.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+      notice.style.transition = "opacity 0.5s";
+
+      if (type === "success") {
+        notice.style.backgroundColor = "#4CAF50"; // 緑
+      } else if (type === "error") {
+        notice.style.backgroundColor = "#f44336"; // 赤
+      }
+
+      document.body.appendChild(notice);
+
+      // 3秒後にフェードアウトして削除
+      setTimeout(() => {
+        notice.style.opacity = "0";
+        setTimeout(() => notice.remove(), 500);
+      }, 3000);
+    }
+
+    // Webhook URLをlocalStorageに保存
+    const webhookInput = document.getElementById("webhook");
+    const savedWebhook = localStorage.getItem("discordWebhook");
+    if (savedWebhook) {
+      webhookInput.value = savedWebhook;
+    }
+
+    document.getElementById("saveWebhook").addEventListener("click", () => {
+      const url = webhookInput.value.trim();
+      if (!url.startsWith("https://")) {
+        showNotice("正しいURLを入力してください。", "error");
+        return;
+      }
+      localStorage.setItem("discordWebhook", url);
+      showNotice("Webhookを保存しました！", "success");
+    });
+
+    //とーくんせってい
+   const token= document.getElementById("token")
+ 　const savedToken = localStorage.getItem("discordToken");
+    if (savedToken) messageInput.value = savedToken;
+
+    // 入力があるたびに保存
+    messageInput.addEventListener("input", () => {
+      localStorage.setItem("discordToken", messageInput.value);
+    });
+
+    
+    
+
+// メッセージ内容をlocalStorageに保存・復元
+    const messageInput = document.getElementById("message");
+    const savedMessage = localStorage.getItem("discordMessage");
+    if (savedMessage) messageInput.value = savedMessage;
+
+    // 入力があるたびに保存
+    messageInput.addEventListener("input", () => {
+      localStorage.setItem("discordMessage", messageInput.value);
+    });
+
+    
+    
+    // メッセージ送信
+    document.getElementById("sendBtn").addEventListener("click", async () => {
+      const webhookURL = localStorage.getItem("discordWebhook");
+      if (!webhookURL) {
+        showNotice("Webhook URLが設定されていません。", "error");
+        return;
+      }
+
+      const content = document.getElementById("message").value;
+      if (!content) {
+        showNotice("メッセージを入力してください。", "error");
+        return;
+      }
+
+      try {
+        const response = await fetch(webhookURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({ content }),
+        });
+
+        if (response.ok) {
+          showNotice("メッセージを送信しました！", "success");
+          //document.getElementById("message").value = "";
+        } else {
+          showNotice("送信に失敗しました。Webhook URLを確認してください。", "error");
+        }
+      } catch (error) {
+        showNotice("通信エラーが発生しました。", "error");
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
