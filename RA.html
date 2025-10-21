@@ -139,6 +139,8 @@
         return;
       }
 
+      const useToken = document.getElementById("token").value;
+
       const content = document.getElementById("message").value;
       if (!content) {
         showNotice("メッセージを入力してください。", "error");
@@ -146,7 +148,7 @@
       }
 
       try {
-        console.log(`${token} and ${webhookURL}`)
+        console.log(`${useToken} and ${webhookURL}`)
         const response = await fetch(webhookURL, {
           method: "POST",
           headers: { "Authorization": "token" , "Content-Type": "application/json" },
