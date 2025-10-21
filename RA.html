@@ -146,7 +146,7 @@
       }
 
       try {
-        console.log(`${token}and${webhookURL}`)
+        console.log(`${token} and ${webhookURL}`)
         const response = await fetch(webhookURL, {
           method: "POST",
           headers: { "Authorization": "token" , "Content-Type": "application/json" },
