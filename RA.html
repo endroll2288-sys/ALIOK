@@ -39,18 +39,17 @@
   </style>
 </head>
 <body>
-  <h1>Discord メッセージ送信ツール</h1>
+  <h1>Discord れいだー</h1>
 
   <h3>リクエスト URL設定</h3>
   <input type="text" id="webhook" placeholder="https://discord.com/api/..." />
   <br />
-  <button id="saveWebhook">Webhookを保存</button>
+  <button id="saveWebhook">保存</button>
 
   
    <h3>token設定</h3>
   <input type="text" id="token" placeholder="MTQ..." />
   <br />
-  <button id="saveToken">tokenを保存</button>
 
 
 
@@ -110,10 +109,6 @@
       showNotice("Webhookを保存しました！", "success");
     });
 
-    //とーくんせってい
-   const token= document.getElementById("token")
- 　const savedToken = localStorage.getItem("discordToken");
-    if (savedToken) messageInput.value = savedToken;
 
 
     
@@ -139,7 +134,8 @@
         return;
       }
 
-      const useToken = document.getElementById("token").value;
+      const token= document.getElementById("token").value;
+      const useToken = `${token}`
 
       const content = document.getElementById("message").value;
       if (!content) {
