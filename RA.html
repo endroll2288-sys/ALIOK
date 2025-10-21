@@ -41,7 +41,7 @@
 <body>
   <h1>Discord メッセージ送信ツール</h1>
 
-  <h3>Webhook URL設定</h3>
+  <h3>リクエスト URL設定</h3>
   <input type="text" id="webhook" placeholder="https://discord.com/api/..." />
   <br />
   <button id="saveWebhook">Webhookを保存</button>
@@ -60,7 +60,7 @@
 
 
   <script>
-    // ✅ 通知メッセージ表示関数
+    //  通知メッセージ表示
     function showNotice(text, type = "success") {
       const notice = document.createElement("div");
       notice.textContent = text;
