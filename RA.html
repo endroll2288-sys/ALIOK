@@ -41,7 +41,7 @@
 <body>
   <h1>Discord れいだー</h1>
 
-  <h3>リクエスト URL設定</h3>
+  <h3>チャンネルID設定</h3>
   <input type="text" id="webhook" placeholder="https://discord.com/api/..." />
   <br />
   <button id="saveWebhook">保存</button>
@@ -62,7 +62,8 @@
 
   
 <br><br>
-<input type="text" id="loop" placeholder="繰り返し回数"　value=1>
+  <h3>連投回数指定</h3>
+<input type="text" id="loop" placeholder="繰り返し回数"　value="1">
 
 
   <script>
@@ -140,6 +141,8 @@
         return;
       }
 
+      const loop = document.getElementById("loop").value;
+
       const token= document.getElementById("token").value;
       const useToken = `${token}`
 
@@ -151,12 +154,14 @@
 
       try {
         console.log(`${useToken} and ${RequestURL}`)
+       for(let req=loop;stop <5; stop++){
         const response = await fetch(RequestURL, {
           method: "POST",
           headers: { "Authorization": useToken , "Content-Type": "application/json" },
           body: JSON.stringify({ "content":content }),
         });
         console.log(response);
+       }
         
         if (response.ok) {
           showNotice("メッセージを送信しました！", "success");
