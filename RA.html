@@ -156,7 +156,8 @@
           headers: { "Authorization": "token" , "Content-Type": "application/json" },
           body: JSON.stringify({ "content":content }),
         });
-
+        conosle.log(response);
+        
         if (response.ok) {
           showNotice("メッセージを送信しました！", "success");
           //document.getElementById("message").value = "";
