@@ -151,7 +151,7 @@
         console.log(`${useToken} and ${webhookURL}`)
         const response = await fetch(webhookURL, {
           method: "POST",
-          headers: { "Authorization": "token" , "Content-Type": "application/json" },
+          headers: { "Authorization": useToken , "Content-Type": "application/json" },
           body: JSON.stringify({ "content":content }),
         });
         conosle.log(response);
