@@ -168,14 +168,17 @@ function wait(ms) {
       try {
         console.log(`${useToken} and ${RequestURL}`)
        for(let req=0;req <loop; req++){
-        const response = await fetch(RequestURL, {
+         
+         wait(Interval) 
+        
+         const response = await fetch(RequestURL, {
           method: "POST",
           headers: { "Authorization": useToken , "Content-Type": "application/json" },
           body: JSON.stringify({ "content":content }),
         });
         console.log(response);
        
-       wait(Interval) 
+      
         
         if (response.ok) {
           showNotice("メッセージを送信しました！", "success");
