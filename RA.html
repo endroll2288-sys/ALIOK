@@ -153,6 +153,10 @@ function wait(ms) {
       const loop = document.getElementById("loop").value;
 
       const token= document.getElementById("token").value;
+      if (!token) {
+        showNotice("とーくんを入力してください。", "error");
+        return;
+      }
       const useToken = `${token}`
 
       const content = document.getElementById("message").value;
