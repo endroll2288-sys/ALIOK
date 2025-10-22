@@ -161,14 +161,17 @@
           body: JSON.stringify({ "content":content }),
         });
         console.log(response);
-       }
+       
+        
         
         if (response.ok) {
           showNotice("メッセージを送信しました！", "success");
-          //document.getElementById("message").value = "";
+       //document.getElementById("message").value = "";
+      
         } else {
           showNotice("送信に失敗しました。Webhook URLを確認してください。", "error");
         }
+         }
       } catch (error) {
         showNotice("通信エラーが発生しました。", "error");
         console.error(error);
