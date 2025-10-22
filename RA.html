@@ -169,7 +169,7 @@ function wait(ms) {
         console.log(`${useToken} and ${RequestURL}`)
        for(let req=0;req <loop; req++){
          
-         wait(Interval) 
+        await wait(Interval);
         
          const response = await fetch(RequestURL, {
           method: "POST",
