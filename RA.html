@@ -66,7 +66,7 @@
 <input type="text" id="loop" placeholder="繰り返し回数"　value="1">
 
  <h3>連投間隔指定</h3>
-<input type="text" id="time" placeholder="インターバル（秒）">
+<input type="text" id="time" placeholder="インターバル（ミリ秒）">
   
   <script>
     //  通知メッセージ表示
@@ -162,7 +162,8 @@ function wait(ms) {
       }
 
       const time = document.getElementById("time").value
-      const Interval=time*1000
+      
+      const Interval=time//*1000
 
       
       try {
