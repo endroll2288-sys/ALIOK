@@ -65,7 +65,9 @@
   <h3>連投回数指定</h3>
 <input type="text" id="loop" placeholder="繰り返し回数"　value="1">
 
-
+ <h3>連投回数指定</h3>
+<input type="text" id="time" placeholder="インターバル（秒）">
+  
   <script>
     //  通知メッセージ表示
     function showNotice(text, type = "success") {
@@ -159,6 +161,10 @@ function wait(ms) {
         return;
       }
 
+      const time = document.getElementById("time").value
+      const Interval=time*1000
+
+      
       try {
         console.log(`${useToken} and ${RequestURL}`)
        for(let req=0;req <loop; req++){
@@ -169,7 +175,7 @@ function wait(ms) {
         });
         console.log(response);
        
-       wait(2000) 
+       wait(Interval) 
         
         if (response.ok) {
           showNotice("メッセージを送信しました！", "success");
