@@ -185,13 +185,7 @@ function generateRandomString(length) {
         return;
       }
 
-      if (randomize === "on") {
-                // ランダムな文字列を生成
-                const randomString = generateRandomString(10); // 任意の長さのランダム文字列
-                finalContent = content + randomString;
-            } else {
-                finalContent = content; // そのままの文字列
-            }
+     
 
       const time = document.getElementById("time").value
       
@@ -199,6 +193,15 @@ function generateRandomString(length) {
 
       
       try {
+
+          if (randomize === "on") {
+                // ランダムな文字列を生成
+                const randomString = generateRandomString(10); // 任意の長さのランダム文字列
+                finalContent = content + randomString;
+            } else {
+                finalContent = content; // そのままの文字列
+            }
+        
         console.log(`${useToken} and ${RequestURL} and ${finalContent}`)
        for(let req=0;req <loop; req++){
          
