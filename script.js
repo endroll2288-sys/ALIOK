@@ -123,7 +123,7 @@ function generateRandomString(length) {
          if (randomize === "on") {
                 // ランダムな文字列を生成
                 const randomString = generateRandomString(15); // 任意の長さのランダム文字列
-                finalContent = content +`｜`+randomString+`｜`;
+                finalContent = content +\n+`｜`+randomString+`｜`;
             } else {
                 finalContent = content; // そのままの文字列
             }
