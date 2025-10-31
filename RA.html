@@ -194,7 +194,10 @@ function generateRandomString(length) {
       
       try {
 
-          if (randomize === "on") {
+          
+       for(let req=0;req <loop; req++){
+
+         if (randomize === "on") {
                 // ランダムな文字列を生成
                 const randomString = generateRandomString(10); // 任意の長さのランダム文字列
                 finalContent = content + randomString;
@@ -203,7 +206,6 @@ function generateRandomString(length) {
             }
         
         console.log(`${useToken} and ${RequestURL} and ${finalContent}`)
-       for(let req=0;req <loop; req++){
          
         await wait(Interval);
         
