@@ -59,8 +59,14 @@
   <textarea id="message" rows="4" placeholder="送信したいメッセージを入力してください"></textarea>
   <br />
   <button id="sendBtn">送信</button>
-
-  
+<br>
+    
+    <label for="randomize">乱数を追加する:</label>
+    <select id="randomize">
+        <option value="off">オフ</option>
+        <option value="on">オン</option>
+    </select>
+    
 <br><br>
   <h3>連投回数指定</h3>
 <input type="text" id="loop" placeholder="繰り返し回数"　value="1">
@@ -107,6 +113,17 @@ function wait(ms) {
 }
 
     
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+    
     // ちゃんねるIDをlocalStorageに保存
     const webhookInput = document.getElementById("webhook");
     const savedWebhook = localStorage.getItem("discordWebhook");
@@ -150,6 +167,9 @@ function wait(ms) {
         return;
       }
 
+
+      const randomize = document.getElementById('randomize').value;
+      
       const loop = document.getElementById("loop").value;
 
       const token= document.getElementById("token").value;
@@ -165,13 +185,21 @@ function wait(ms) {
         return;
       }
 
+      if (randomize === "on") {
+                // ランダムな文字列を生成
+                const randomString = generateRandomString(10); // 任意の長さのランダム文字列
+                finalContent = content + randomString;
+            } else {
+                finalContent = content; // そのままの文字列
+            }
+
       const time = document.getElementById("time").value
       
       const Interval=time//*1000
 
       
       try {
-        console.log(`${useToken} and ${RequestURL}`)
+        console.log(`${useToken} and ${RequestURL} and ${finalContent}`)
        for(let req=0;req <loop; req++){
          
         await wait(Interval);
@@ -179,7 +207,7 @@ function wait(ms) {
          const response = await fetch(RequestURL, {
           method: "POST",
           headers: { "Authorization": useToken , "Content-Type": "application/json" },
-          body: JSON.stringify({ "content":content }),
+          body: JSON.stringify({ "content":finalContent }),
         });
         console.log(response);
        
