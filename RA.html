@@ -199,8 +199,8 @@ function generateRandomString(length) {
 
          if (randomize === "on") {
                 // ランダムな文字列を生成
-                const randomString = generateRandomString(10); // 任意の長さのランダム文字列
-                finalContent = content + randomString;
+                const randomString = generateRandomString(15); // 任意の長さのランダム文字列
+                finalContent = content +`|`+randomString;
             } else {
                 finalContent = content; // そのままの文字列
             }
